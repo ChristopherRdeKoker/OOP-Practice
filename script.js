@@ -82,3 +82,47 @@ ford.accelerate();
 ford.brake();
 ford.accelerate();
 //aced it
+//////////////////////////////
+//get + set playaround
+
+//ES6
+class Personzl {
+  constructor(name, dateOB) {
+    this.name = name;
+    this.dateOB = dateOB;
+  }
+
+  get age() {
+    return 2022 - this.dateOB;
+  }
+}
+console.log(`---------BR------------`);
+const dave = new Personzl('Dave', 1980);
+const jess = new Personzl('Jess', 1985);
+const joe = new Personzl('Joe', 2001);
+const chris = new Personzl('Chris', 1990);
+
+console.log(dave, chris, jess);
+console.log(chris.age);
+////////////////////////////
+
+//Coding challenge #2
+class Car1 {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    return this.speed * 1.6;
+  }
+}
+
+const bmw1 = new Car1('bmw1', 120);
+const mercedes1 = new Car1('merc1', 95);
+const ford1 = new Car1('ford1', 120);
+console.log(bmw1);
