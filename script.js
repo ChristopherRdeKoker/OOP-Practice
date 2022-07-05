@@ -62,12 +62,14 @@ const Mercedes = new Car(`Mercedes`, 95);
 
 Car.prototype.accelerate = function () {
   this.speed = this.speed + 10;
+  //this.speed +=;
   console.log(`${this.make} going at ${this.speed}km/h`);
 };
 
-Car.prototype.decrease = function () {
-  this.speed = this.speed - 10;
-  console.log(`${this.make} going at ${dec}km/h`);
+Car.prototype.brake = function () {
+  this.speed = this.speed - 5;
+  //this.speed -=;
+  console.log(`${this.make} going at ${this.speed}km/h`);
 };
 
 bMW.accelerate();
@@ -77,5 +79,6 @@ const ford = new Car(`Ford`, 80);
 
 ford.accelerate();
 ford.accelerate();
+ford.brake();
 ford.accelerate();
 //aced it
