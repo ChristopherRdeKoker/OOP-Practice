@@ -146,3 +146,29 @@ ford1.speedUS = 50;
 
 console.log(ford1);
 //gg
+////////////////
+//inheritance practice
+
+const Person123 = function (firstName, birth) {
+  this.firstName = firstName;
+  this.birth = birth;
+};
+
+Person123.prototype.calcAge = function () {
+  console.log(2037 - this.birth);
+};
+
+const Student = function (firstName, birth, course) {
+  Person123.call(this, firstName, birth);
+  this.course = course;
+};
+
+Student.prototype.introduce = function () {
+  console.log(
+    `My name is ${this.firstName} and I aim to become a ${this.course}.`
+  );
+};
+
+const mike = new Student('Mike', 2002, 'Chef');
+console.log(mike);
+mike.introduce();
