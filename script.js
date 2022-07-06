@@ -77,10 +77,10 @@ bMW.accelerate();
 const ford = new Car(`Ford`, 80);
 // console.log(ford);
 
-ford.accelerate();
-ford.accelerate();
-ford.brake();
-ford.accelerate();
+// ford.accelerate();
+// // ford.accelerate();
+// ford.brake();
+// ford.accelerate();
 //aced it
 //////////////////////////////
 //get + set playaround
@@ -102,50 +102,50 @@ const jess = new Personzl('Jess', 1985);
 const joe = new Personzl('Joe', 2001);
 const chris = new Personzl('Chris', 1990);
 
-console.log(dave, chris, jess);
-console.log(chris.age);
+// console.log(dave, chris, jess);
+// console.log(chris.age);
 ////////////////////////////
 
-//Coding challenge #2
-class Car1 {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+// //Coding challenge #2
+// class Car1 {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
 
-  get speedUS() {
-    return this.speed / 1.6;
-  }
+//   get speedUS() {
+//     return this.speed / 1.6;
+//   }
 
-  set speedUS(speed) {
-    this.speed = speed * 1.6;
-  }
-  accelerate() {
-    this.speed = this.speed + 10;
-    //this.speed +=;
-    console.log(`${this.make} going at ${this.speed}km/h`);
-  }
+//   set speedUS(speed) {
+//     this.speed = speed * 1.6;
+//   }
+//   accelerate() {
+//     this.speed = this.speed + 10;
+//     //this.speed +=;
+//     console.log(`${this.make} going at ${this.speed}km/h`);
+//   }
 
-  brake() {
-    this.speed = this.speed - 5;
-    //this.speed -=;
-    console.log(`${this.make} going at ${this.speed}km/h`);
-  }
-}
+//   brake() {
+//     this.speed = this.speed - 5;
+//     //this.speed -=;
+//     console.log(`${this.make} going at ${this.speed}km/h`);
+//   }
+// }
 
-const bmw1 = new Car1('bmw1', 120);
-const mercedes1 = new Car1('merc1', 95);
-const ford1 = new Car1('ford1', 120);
-console.log(bmw1);
+// const bmw1 = new Car1('bmw1', 120);
+// const mercedes1 = new Car1('merc1', 95);
+// const ford1 = new Car1('ford1', 120);
+// console.log(bmw1);
 
-ford1.brake();
-ford1.brake();
-ford1.accelerate();
+// ford1.brake();
+// ford1.brake();
+// ford1.accelerate();
 
-ford1.speedUS = 50;
+// ford1.speedUS = 50;
 
-console.log(ford1);
-//gg
+// console.log(ford1);
+// //gg
 ////////////////
 //inheritance practice
 
@@ -172,3 +172,56 @@ Student.prototype.introduce = function () {
 const mike = new Student('Mike', 2002, 'Chef');
 console.log(mike);
 mike.introduce();
+///////////////////////////////////////////////////////
+//Code challenge #3
+
+const NewCar = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+const EV = function (make, speed, charge) {
+  NewCar.call(this, make, speed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(NewCar.prototype);
+
+EV.prototype.accelerate = function () {
+  this.speed += 10;
+  this.charge -= 1;
+  console.log(
+    `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
+  );
+};
+
+EV.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(
+    `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
+  );
+};
+
+const tesla = new EV('Tesla', 120, 23);
+// console.log(tesla.__proto__);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+  console.log(`'${this.make}' charged to ${chargeTo}% battery again.`);
+};
+tesla.chargeBattery(90);
+console.log(tesla);
+tesla.accelerate();
+tesla.accelerate();
+tesla.accelerate();
+tesla.accelerate();
+tesla.accelerate();
+tesla.brake();
+tesla.brake();
+tesla.brake();
+tesla.brake();
+tesla.brake();
+tesla.brake();
+tesla.accelerate();
+tesla.chargeBattery(90);
+tesla.accelerate();
