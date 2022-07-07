@@ -1,40 +1,40 @@
 'use strict';
 
-const part1 = function () {
-  const Person = function (firstName, Dob) {
-    this.firstName = firstName;
-    this.DateOfBirth = Dob;
-  };
-
-  const leela = new Person('Leela', 3001);
-  const fry = new Person('Fry', 1980);
-  const bender = new Person('Bender', 2869);
-
-  console.log(leela, fry, bender);
-  //absolute limit of prototype, returns null. End of prototype scope/range
-  console.log(leela.__proto__.__proto__.__proto__);
-  console.log(`------Br-----`);
-  console.log(Person.prototype);
-
-  // console.log(fry.calcAge());
-
-  Person.prototype.calcAge = function () {
-    console.log(`${Math.abs(2022 - this.DateOfBirth)}`);
-  };
-
-  leela.calcAge();
-  bender.calcAge();
-
-  Person.prototype.GreetMessageMr = function () {
-    console.log(`Good morning Mr.${this.firstName[0]}`);
-  };
-  Person.prototype.GreetMessageMs = function () {
-    console.log(`Good morning Ms.${this.firstName[0]}`);
-  };
-
-  leela.GreetMessageMs();
-  fry.GreetMessageMr();
+// const part1 = function () {
+const Person = function (firstName, Dob) {
+  this.firstName = firstName;
+  this.DateOfBirth = Dob;
 };
+
+const leela = new Person('Leela', 3001);
+const fry = new Person('Fry', 1980);
+const bender = new Person('Bender', 2869);
+
+console.log(leela, fry, bender);
+//absolute limit of prototype, returns null. End of prototype scope/range
+console.log(leela.__proto__.__proto__.__proto__);
+console.log(`------Br-----`);
+console.log(Person.prototype);
+
+// console.log(fry.calcAge());
+
+Person.prototype.calcAge = function () {
+  console.log(`${Math.abs(2022 - this.DateOfBirth)}`);
+};
+
+leela.calcAge();
+bender.calcAge();
+
+Person.prototype.GreetMessageMr = function () {
+  console.log(`Good morning Mr.${this.firstName[0]}`);
+};
+Person.prototype.GreetMessageMs = function () {
+  console.log(`Good morning Ms.${this.firstName[0]}`);
+};
+
+leela.GreetMessageMs();
+fry.GreetMessageMr();
+// };
 ///////////////////////////////////////////////////////////////////////
 // Coding Challenge #1
 
@@ -158,70 +158,191 @@ Person123.prototype.calcAge = function () {
   console.log(2037 - this.birth);
 };
 
-const Student = function (firstName, birth, course) {
+const Studentz = function (firstName, birth, course) {
   Person123.call(this, firstName, birth);
   this.course = course;
 };
 
-Student.prototype.introduce = function () {
+Studentz.prototype.introduce = function () {
   console.log(
     `My name is ${this.firstName} and I aim to become a ${this.course}.`
   );
 };
 
-const mike = new Student('Mike', 2002, 'Chef');
+const mike = new Studentz('Mike', 2002, 'Chef');
 console.log(mike);
 mike.introduce();
 ///////////////////////////////////////////////////////
 //Code challenge #3
 
-const NewCar = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const NewCar = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-const EV = function (make, speed, charge) {
-  NewCar.call(this, make, speed);
-  this.charge = charge;
-};
+// const EV = function (make, speed, charge) {
+//   NewCar.call(this, make, speed);
+//   this.charge = charge;
+// };
 
-EV.prototype = Object.create(NewCar.prototype);
+// EV.prototype = Object.create(NewCar.prototype);
 
-EV.prototype.accelerate = function () {
-  this.speed += 10;
-  this.charge -= 1;
-  console.log(
-    `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
-  );
-};
+// EV.prototype.accelerate = function () {
+//   this.speed += 10;
+//   this.charge -= 1;
+//   console.log(
+//     `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
+//   );
+// };
 
-EV.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(
-    `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
-  );
-};
+// EV.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(
+//     `'${this.make}' going at ${this.speed} km/h, with a charge of ${this.charge}%.`
+//   );
+// };
 
-const tesla = new EV('Tesla', 120, 23);
-// console.log(tesla.__proto__);
+// const tesla = new EV('Tesla', 120, 23);
+// console.log(tesla);
 
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-  console.log(`'${this.make}' charged to ${chargeTo}% battery again.`);
-};
-tesla.chargeBattery(90);
-console.log(tesla);
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.brake();
-tesla.brake();
-tesla.brake();
-tesla.brake();
-tesla.brake();
-tesla.brake();
-tesla.accelerate();
-tesla.chargeBattery(90);
-tesla.accelerate();
+// // console.log(tesla.__proto__);
+
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+//   console.log(`'${this.make}' charged to ${chargeTo}% battery again.`);
+// };
+// tesla.chargeBattery(90);
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.brake();
+// tesla.brake();
+// tesla.brake();
+// tesla.brake();
+// tesla.brake();
+// tesla.brake();
+// tesla.accelerate();
+// tesla.chargeBattery(90);
+// tesla.accelerate();
+//////////////////////////////////////////////////
+//Summary using ES6 classes + encapsulation(private)
+
+class Student extends Person {
+  university = 'University of DZ';
+  #studyHours = 0;
+  #course;
+  static numSubjects = 10;
+
+  constructor(Fullname, birthYear, startYear, course) {
+    super(Fullname, birthYear);
+    this.startYear = startYear;
+    this.#course = course;
+  }
+
+  introduce() {
+    console.log(`I study ${this.course} at ${this.university}`);
+  }
+
+  study(h) {
+    this.#studyHours += h;
+    this.#makeCoffee();
+  }
+
+  #makeCoffee() {
+    console.log(`One Cuppo Joe right up ☕`);
+  }
+
+  set testScore(score) {
+    this._testScore = score <= 20 ? score : 0;
+  }
+
+  get testScore() {
+    return this._testScore;
+  }
+
+  static printCurriculum() {
+    console.log(`There are ${this.numSubjects} subjects`);
+  }
+}
+
+const maeve = new Student('Maeve Jones', 2002, 2030, 'Marine Biology');
+console.log(maeve);
+////////////////////////////
+///////////////////////////
+////////////////////////////
+//Coding challenge #4
+class CarCL {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} going at ${this.speed}km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} going at ${this.speed}km/h`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+// const tesla4 = new CarCL('tesla', 120);
+// console.log(tesla4);
+// tesla4.accelerate();
+
+class EVCL extends CarCL {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  accelerate() {
+    this.speed += 10;
+    this.#charge -= 1;
+    console.log(
+      `'${this.make}' going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%.`
+    );
+    return this;
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(
+      `'${this.make}' going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%.`
+    );
+    return this;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    console.log(`'${this.make}' charged to ${this.#charge}% battery again.`);
+    return this;
+  }
+}
+
+const rivian = new EVCL('Rivian', 120, 23);
+rivian
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(55)
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(70);
