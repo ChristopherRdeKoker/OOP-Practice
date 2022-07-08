@@ -283,11 +283,13 @@ class CarCL {
   accelerate() {
     this.speed += 10;
     console.log(`${this.make} going at ${this.speed}km/h`);
+    return this;
   }
 
   brake() {
     this.speed -= 5;
     console.log(`${this.make} going at ${this.speed}km/h`);
+    return this;
   }
 
   get speedUS() {
@@ -309,25 +311,25 @@ class EVCL extends CarCL {
     super(make, speed);
     this.#charge = charge;
   }
-  accelerate() {
-    this.speed += 10;
-    this.#charge -= 1;
-    console.log(
-      `'${this.make}' going at ${this.speed} km/h, with a charge of ${
-        this.#charge
-      }%.`
-    );
-    return this;
-  }
-  brake() {
-    this.speed -= 5;
-    console.log(
-      `'${this.make}' going at ${this.speed} km/h, with a charge of ${
-        this.#charge
-      }%.`
-    );
-    return this;
-  }
+  // accelerate() {
+  //   this.speed += 10;
+  //   this.#charge -= 1;
+  //   console.log(
+  //     `'${this.make}' going at ${this.speed} km/h, with a charge of ${
+  //       this.#charge
+  //     }%.`
+  //   );
+  //   return this;
+  // }
+  // brake() {
+  //   this.speed -= 5;
+  //   console.log(
+  //     `'${this.make}' going at ${this.speed} km/h, with a charge of ${
+  //       this.#charge
+  //     }%.`
+  //   );
+  //   return this;
+  // }
 
   chargeBattery(chargeTo) {
     this.#charge = chargeTo;
@@ -346,3 +348,5 @@ rivian
   .accelerate()
   .brake()
   .chargeBattery(70);
+
+rivian.accelerate();
